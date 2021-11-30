@@ -116,9 +116,9 @@ public final class LambdaUtilities {
          * 
          * Keep in mind that a map can be iterated through its forEach method
          */
-        final Map<K, V> mapCopy = new HashMap<>(); // def copy
-        map.forEach((K, V) -> mapCopy.put(K, V.orElse(def.get())));
-        return mapCopy;
+        final Map<K, V> resultMap = new HashMap<>();
+        map.forEach((K, V) -> resultMap.put(K, V.orElse(def.get())));
+        return resultMap;
     }
 
     /**
