@@ -13,6 +13,8 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 /**
  * This class will contain four utility functions on lists and maps, of which the first one is provided as example.
  * 
@@ -61,7 +63,9 @@ public final class LambdaUtilities {
         /*
          * Suggestion: consider Optional.filter
          */
-        return null;
+        final List<Optional<T>> resultList = new ArrayList<>();
+        list.forEach(el -> resultList.add(Optional.ofNullable(el).filter(pre))); 
+        return resultList;
     }
 
     /**
