@@ -31,7 +31,10 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Stream<String> orderedSongNames() {
-        return this.songs.stream().map(Song::getSongName).sorted((s1, s2) -> s1.compareTo(s2));
+        return this.songs
+                .stream()
+                .map(Song::getSongName)
+                .sorted((s1, s2) -> s1.compareTo(s2));
     }
 
     @Override
@@ -52,22 +55,35 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public int countSongs(final String albumName) {
-        return (int) this.songs.stream().filter(s -> s.albumName.equals(Optional.ofNullable(albumName))).count();
+        return (int) this.songs
+                .stream()
+                .filter(s -> s.albumName.equals(Optional.ofNullable(albumName)))
+                .count();
     }
 
     @Override
     public int countSongsInNoAlbum() {
-        return (int) this.songs.stream().filter(s -> s.albumName.equals(Optional.empty())).count();
+        return (int) this.songs
+                .stream()
+                .filter(s -> s.albumName.equals(Optional.empty()))
+                .count();
     }
 
     @Override
     public OptionalDouble averageDurationOfSongs(final String albumName) {
-        return this.songs.stream().filter(s -> s.albumName.equals(Optional.ofNullable(albumName))).mapToDouble(MusicGroupImpl.Song::getDuration).average();
+        return this.songs
+                .stream()
+                .filter(s -> s.albumName.equals(Optional.ofNullable(albumName)))
+                .mapToDouble(MusicGroupImpl.Song::getDuration)
+                .average();
     }
 
     @Override
     public Optional<String> longestSong() {
-        return this.songs.stream().max((s1, s2) -> Double.compare(s1.getDuration(), s2.getDuration())).map(Song::getSongName);
+        return this.songs
+                .stream()
+                .max((s1, s2) -> Double.compare(s1.getDuration(), s2.getDuration()))
+                .map(Song::getSongName);
     }
 
     @Override
