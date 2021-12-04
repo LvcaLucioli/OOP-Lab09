@@ -42,7 +42,11 @@ public final class MusicGroupImpl implements MusicGroup {
     @Override
     public Stream<String> albumInYear(final int year) {
         Set<String> set = new HashSet<String>();
-        this.albums.forEach((k, v) -> { if(v == year) set.add(k); });
+        this.albums.forEach((k, v) -> { 
+            if (v == year) {
+                set.add(k);
+                } 
+            });
         return set.stream();
     }
 
