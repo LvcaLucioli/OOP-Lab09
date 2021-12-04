@@ -1,13 +1,11 @@
 package it.unibo.oop.lab.lambda.ex02;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -48,7 +46,8 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public int countSongs(final String albumName) {
-        return -1;
+        int a = 0;
+        return (int) this.songs.stream().filter(s -> s.albumName.equals(albumName)).count();
     }
 
     @Override
