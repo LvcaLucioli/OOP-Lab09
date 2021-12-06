@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -42,12 +43,17 @@ public final class LambdaFilter extends JFrame {
         TO_LOWERCASE("convert to lowercase", String::toLowerCase),
         COUNT_CHARS("count the number of chars", s -> Integer.toString(s.length())),
         COUNT_LINES("count the number of lines", s -> Long.toString(s.lines().count())),
-        ALPHA_SORT("list all the words in alphabetical order", s -> s.lines().sorted().collect(Collectors.joining("\n"))),
-        COUNT_WORDS("write the count of each word", s -> s.lines()
+        ALPHA_SORT("list all the words in alphabetical order", s -> Arrays
+                .asList(s.split("(\\s|\\p{Punct})+"))
+                .stream()
+                .sorted()
+                .collect(Collectors.joining("\n"))),
+        COUNT_WORDS("write the count of each word", s -> Arrays.asList(s.split("(\\s|\\p{Punct})+"))
+                .stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet()
                 .stream()
-                .map(entry -> entry.getKey() + " -> " + entry.getValue())
+                .map(entry -> entry.getKey() + " -> " + entry.getValue() + " ")
                 .collect(Collectors.joining()));
 
         private final String commandName;
