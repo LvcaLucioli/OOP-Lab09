@@ -35,7 +35,12 @@ public final class LambdaFilter extends JFrame {
     private static final long serialVersionUID = 1760990730218643730L;
 
     private enum Command {
-        IDENTITY("No modifications", Function.identity());
+        IDENTITY("No modifications", Function.identity()),
+        TO_LOWERCASE("convert to lowercase", String::toLowerCase),
+        COUNT_CHARS("count the number of chars", s -> Integer.toString(s.length())),
+        COUNT_LINES("count the number of lines"),
+        ALPHA_SORT("list all the words in alphabetical order"),
+        COUNT_WORDS("write the count of each word");
 
         private final String commandName;
         private final Function<String, String> fun;
@@ -81,6 +86,8 @@ public final class LambdaFilter extends JFrame {
         final int sh = (int) screen.getHeight();
         setSize(sw / 4, sh / 4);
         setLocationByPlatform(true);
+        
+    
     }
 
     /**
