@@ -42,7 +42,7 @@ public final class LambdaFilter extends JFrame {
         TO_LOWERCASE("convert to lowercase", String::toLowerCase),
         COUNT_CHARS("count the number of chars", s -> Integer.toString(s.length())),
         COUNT_LINES("count the number of lines", s -> Long.toString(s.lines().count())),
-        ALPHA_SORT("list all the words in alphabetical order", s -> s.lines().sorted().findFirst().orElse("")),
+        ALPHA_SORT("list all the words in alphabetical order", s -> s.lines().sorted().collect(Collectors.joining("\n"))),
         COUNT_WORDS("write the count of each word", s -> s.lines()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet()
